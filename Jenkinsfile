@@ -18,7 +18,7 @@ git branch : 'main', url: "https://github.com/ayush4u-cpu/maven-project.git"
 stage('build docker image')
 {
 steps {
-   sh 'docker build -t $DOCKER_IMAGE:latest'
+   sh 'docker build -t $DOCKER_IMAGE:latest .'
 }
 }
 stage('docker login')
