@@ -15,13 +15,6 @@ stages {
 git branch : 'main', url: "https://github.com/ayush4u-cpu/maven-project.git"
 }
 }
-stage('build JAR')
-{
-  steps {
-   sh 'chmod +x mvnw'
-   sh './mvnw clean package -DskipTests'
-}
-}
 stage('build docker image')
 {
 steps {
