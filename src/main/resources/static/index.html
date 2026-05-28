@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Login</title>
+</head>
+<body>
+
+  <h2>Login Form</h2>
+
+  <form id="loginForm">
+    Username: <input type="text" id="username" placeholder="Username" required /> <br/><br/>
+    Password: <input type="password" id="password" placeholder="Password" required /> <br/><br/>
+    <button type="submit">Sign In</button> <br/>
+  </form>
+  <br/>
+
+  <script>
+    const form = document.getElementById('loginForm');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+
+      try {
+        const response = await fetch('/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({ user:username, passwd:password })
+        });
+
+        const data = await response.json();
+
+        renderStatus(`${data.message}`);
+      } catch (err) {
+    	renderStatus("");
+      }
+    });
+    
+ 	// Helper function to dynamically insert the element into the DOM
+    function renderStatus(text) {
+      const element = document.getElementById("status");
+      if (element)
+    	  element.remove();
+      const statusDiv = document.createElement('div');
+      statusDiv.id = 'status';
+      statusDiv.innerText = text;
+      document.body.appendChild(statusDiv); // Or append it wherever you like
+    }
+  </script>
+
+</body>
+</html>
