@@ -52,6 +52,7 @@ steps {
 stage ('test application')
 {
 steps {
+  sh 'sleep 20'
    sh 'curl http://localhost:3000/index.html'
 }
 }
